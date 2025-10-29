@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Plex",
+    "command": "chromium --app=http://192.168.1.29:32400/",
+    "icon": "icons/plex.png"
+  },
+  {
+    "name": "YouTube Music",
+    "command": "youtube-music-desktop-app",
+    "icon": "icons/youtubemusic.png"
+  },
+  {
+    "name": "Steam Link",
+    "command": "steamlink",
+    "icon": "icons/steam.png"
+  },
+  {
+    "name": "Moonlight",
+    "command": "moonlight stream <PC_IP> -app Desktop",
+    "icon": "icons/moonlight.png"
+  }
+]
+
