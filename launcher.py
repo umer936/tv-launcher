@@ -1,42 +1,37 @@
 #!/usr/bin/env python3
-import sys, json, subprocess, os
-from PyQt6.QtWidgets import QApplication, QWidget, QGridLayout, QPushButton
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt, QSize
+import sys, json, os, subprocess
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtCore import QUrl, pyqtSlot, QObject
+from PyQt6.QtWebChannel import QWebChannel
 
-# Load apps
-with open(os.path.join(os.path.dirname(__file__), "apps.json")) as f:
-    apps = json.load(f)
+# Backend for JS to call
+class Backend(QObject):
+    @pyqtSlot(str)
+    def launch(self, app_name):
+        with open(os.path.join(os.path.dirname(__file__), "apps.json")) as f:
+            apps = json.load(f)
+        for a in apps:
+            if a["name"] == app_name:
+                subprocess.Popen(a["command"], shell=True)
 
 app = QApplication(sys.argv)
-window = QWidget()
+window = QMainWindow()
 window.setWindowTitle("TV Launcher")
-window.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 window.showFullScreen()
 
-layout = QGridLayout()
-layout.setSpacing(20)
-window.setLayout(layout)
+view = QWebEngineView()
+window.setCentralWidget(view)
 
-# Add app buttons
-for i, a in enumerate(apps):
-    btn = QPushButton(a["name"])
-    btn.setIcon(QIcon(a["icon"]))
-    btn.setIconSize(QSize(128,128))
-    btn.setFixedSize(200,200)
-    btn.setStyleSheet("""
-        QPushButton {
-            font-size: 16px;
-            background-color: #222;
-            color: white;
-            border-radius: 15px;
-        }
-        QPushButton:hover {
-            background-color: #444;
-        }
-    """)
-    btn.clicked.connect(lambda checked, cmd=a["command"]: subprocess.Popen(cmd, shell=True))
-    layout.addWidget(btn, i//2, i%2)
+# Web channel for JS-Python communication
+channel = QWebChannel()
+backend = Backend()
+channel.registerObject("backend", backend)
+view.page().setWebChannel(channel)
+
+# Load local HTML
+html_path = os.path.join(os.path.dirname(__file__), "web/index.html")
+view.load(QUrl.fromLocalFile(html_path))
 
 sys.exit(app.exec())
 

@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    background: #121212;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(3, 220px);
+    gap: 30px;
+}
+
+.tile {
+    background: #1e1e1e;
+    border-radius: 20px;
+    width: 220px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.tile:hover {
+    transform: scale(1.1);
+    background: #333;
+}
+
+.tile img {
+    width: 128px;
+    height: 128px;
+}
+
+.tile span {
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
