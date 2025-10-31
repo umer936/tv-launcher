@@ -2,22 +2,32 @@
   {
     "name": "Plex",
     "command": "chromium --app=http://192.168.1.29:32400/",
-    "icon": "icons/plex.png"
+    "icon": "icons/plex.png",
+    "brand_domain": "plex.tv"
   },
   {
     "name": "YouTube Music",
     "command": "youtube-music-desktop-app",
-    "icon": "icons/youtubemusic.png"
+    "icon": "icons/youtubemusic.png",
+    "brand_domain": "youtubemusic.com"
+  },
+  {
+    "name": "YouTube",
+    "command": "chromium --app=https://youtube.com/",
+    "icon": "icons/youtube.png",
+    "theme": "dark"
   },
   {
     "name": "Steam Link",
     "command": "steamlink",
-    "icon": "icons/steam.png"
+    "icon": "icons/steam.png",
+    "brand_domain": "steampowered.com"
   },
   {
     "name": "Moonlight",
     "command": "moonlight stream <PC_IP> -app Desktop",
-    "icon": "icons/moonlight.png"
+    "icon": "icons/moonlight.png",
+    "brand_domain": "moonlight-stream.org",
+    "logo_path": "/logo"
   }
 ]
-
