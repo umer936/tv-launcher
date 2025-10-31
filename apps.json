@@ -10,6 +10,11 @@
     "icon": "icons/youtubemusic.png"
   },
   {
+    "name": "YouTube",
+    "command": "chromium --app=https://youtube.com/",
+    "icon": "icons/youtube.png"
+  },
+  {
     "name": "Steam Link",
     "command": "steamlink",
     "icon": "icons/steam.png"
@@ -20,4 +25,3 @@
     "icon": "icons/moonlight.png"
   }
 ]
-
