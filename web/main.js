@@ -6,12 +6,13 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         .then(res => res.json())
         .then(apps => {
             const grid = document.getElementById('grid');
-            apps.forEach(a => {
+            apps.forEach((a, index) => {
                 // Convert app name to safe filename
                 const iconName = a.name.replace(/ /g, "_") + ".png";
                 const tile = document.createElement('div');
                 tile.className = 'tile';
-                tile.innerHTML = `<img src="../icons/${iconName}"><span>${a.name}</span>`;
+                tile.setAttribute('tabindex', index + 1); // make focusable
+                tile.innerHTML = `<img src="../icons/${iconName}" onerror="this.src='../icons/default.png'"><span>${a.name}</span>`;
                 tile.onclick = () => backend.launch(a.name);
                 grid.appendChild(tile);
             });
@@ -45,4 +46,35 @@ new QWebChannel(qt.webChannelTransport, function(channel) {
         }
     };
 });
+
+document.addEventListener('keydown', (e) => {
+    const tiles = Array.from(document.querySelectorAll('.tile'));
+    const cols = 4; // number of tiles per row, adjust to your grid
+    let currentIndex = tiles.findIndex(tile => tile === document.activeElement);
+
+    if (currentIndex === -1) {
+        // If nothing is focused, focus the first tile
+        tiles[0]?.focus();
+        return;
+    }
+
+    switch (e.key) {
+        case 'ArrowRight':
+            if (currentIndex < tiles.length - 1) tiles[currentIndex + 1].focus();
+            break;
+        case 'ArrowLeft':
+            if (currentIndex > 0) tiles[currentIndex - 1].focus();
+            break;
+        case 'ArrowDown':
+            if (currentIndex + cols < tiles.length) tiles[currentIndex + cols].focus();
+            break;
+        case 'ArrowUp':
+            if (currentIndex - cols >= 0) tiles[currentIndex - cols].focus();
+            break;
+        case 'Enter':
+            document.activeElement.click();
+            break;
+    }
+});
+
 
