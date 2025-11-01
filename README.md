@@ -49,20 +49,18 @@ cd ~/tv-launcher
     {
         "name": "Plex",
         "command": "chromium --app=https://app.plex.tv/web",
-        "icon": "icons/plex.png"
     },
     {
         "name": "YouTube Music",
         "command": "youtube-music-desktop-app",
-        "icon": "icons/ytmusic.png"
     }
 ]
 ```
 
-3. Make launcher executable:
+3. Download the icons:
 
 ```bash
-chmod +x launcher.py
+./batch_download_icons.py
 ```
 
 ---
@@ -105,7 +103,7 @@ vim ~/.config/lxsession/LXDE-pi/autostart
 
 * Controller support: map arrow keys or D-pad to navigate tiles
 * Themes: modify CSS in HTML version (if using WebEngine)
-* “All Apps” page: add more tiles with additional pages
+* All Apps page: add more tiles with additional pages
 
 ---
 
