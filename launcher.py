@@ -4,16 +4,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtCore import QUrl, pyqtSlot, QObject
 from PyQt6.QtWebChannel import QWebChannel
-
-# Backend for JS to call
-class Backend(QObject):
-    @pyqtSlot(str)
-    def launch(self, app_name):
-        with open(os.path.join(os.path.dirname(__file__), "apps.json")) as f:
-            apps = json.load(f)
-        for a in apps:
-            if a["name"] == app_name:
-                subprocess.Popen(a["command"], shell=True)
+from web.backend import Backend
 
 app = QApplication(sys.argv)
 window = QMainWindow()

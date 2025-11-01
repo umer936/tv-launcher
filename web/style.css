@@ -44,3 +44,45 @@ body {
     font-size: 18px;
 }
 
+#menu {
+    position: fixed;
+    top: 20px;
+    right: -200px; /* hidden initially */
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1000;
+    transition: right 0.3s ease-in-out;
+}
+
+#menu.show {
+    right: 20px; /* slide in */
+}
+
+#menu button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#menu button:hover {
+    background: #555;
+}
+
+#menu-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+}
+
