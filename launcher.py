@@ -3,6 +3,7 @@ import sys, json, os, subprocess
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtCore import QUrl, pyqtSlot, QObject
+from PyQt6.QtGui import QColor
 from PyQt6.QtWebChannel import QWebChannel
 from web.backend import Backend
 
@@ -12,6 +13,8 @@ window.setWindowTitle("TV Launcher")
 window.showFullScreen()
 
 view = QWebEngineView()
+view.setStyleSheet("background-color: #121212;") # dark gray / black
+view.page().setBackgroundColor(QColor("#121212"))
 window.setCentralWidget(view)
 
 # Web channel for JS-Python communication
