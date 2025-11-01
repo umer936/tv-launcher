@@ -9,10 +9,10 @@ def main():
 
     # Check files
     if not os.path.exists(script_path):
-        print(f"❌ Could not find {script_path}")
+        print(f"Could not find {script_path}")
         sys.exit(1)
     if not os.path.exists(apps_file):
-        print(f"❌ Could not find {apps_file}")
+        print(f"Could not find {apps_file}")
         sys.exit(1)
 
     # Load app list
@@ -26,10 +26,10 @@ def main():
     for app in apps:
         name = app.get("name")
         if not name:
-            print("⚠️ Skipping entry with no 'name'")
+            print("Skipping entry with no 'name'")
             continue
 
-        print(f"\n🎯 Downloading icon for: {name}")
+        print(f"\nDownloading icon for: {name}")
 
         try:
             subprocess.run(
@@ -37,9 +37,9 @@ def main():
                 check=True
             )
         except subprocess.CalledProcessError as e:
-            print(f"❌ Failed to download icon for {name}: {e}")
+            print(f"Failed to download icon for {name}: {e}")
 
-    print("\n✅ All downloads attempted.")
+    print("\nAll downloads attempted.")
 
 if __name__ == "__main__":
     main()

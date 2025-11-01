@@ -51,7 +51,11 @@ def download_high_res_icon(package_name, app_name=None):
     if app_name is None:
         app_name = package_name
 
-    save_path = os.path.join(os.getcwd(), "icons", f"{app_name}.png")
+    # Replace spaces with underscores
+    safe_name = app_name.replace(" ", "_")
+    save_path = os.path.join(os.getcwd(), "icons", f"{safe_name}.png")
+
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
     icon_response = requests.get(icon_url)
     icon_response.raise_for_status()
@@ -59,7 +63,7 @@ def download_high_res_icon(package_name, app_name=None):
     with open(save_path, "wb") as f:
         f.write(icon_response.content)
 
-    print(f"✅ Icon saved to: {save_path}")
+    print(f"Icon saved to: {save_path}")
     return save_path
 
 def main():
@@ -75,7 +79,7 @@ def main():
         print(f"Found package: {pkg}")
         download_high_res_icon(pkg, app_name)
     except Exception as e:
-        print("❌ Error:", e)
+        print("Error:", e)
         sys.exit(1)
 
 if __name__ == "__main__":
